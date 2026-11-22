@@ -1,0 +1,4 @@
+interface:
+  display_name: "Live2D Character Workflow"
+  short_description: "从立绘拆层、遮挡补画到可编辑的 Cubism 模型和循环动画"
+  default_prompt: "用 $live2d-character-workflow 把我提供的立绘制作成可编辑的 Live2D 角色工程，并导出带背景的循环预览。"

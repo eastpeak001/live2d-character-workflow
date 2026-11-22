@@ -1,0 +1,79 @@
+<templates>
+  <CWarpDeformerSource>
+    <ACDeformerSource xs.n="super">
+      <ACParameterControllableSource xs.n="super">
+        <s xs.n="localName" />
+        <b xs.n="isVisible">true</b>
+        <b xs.n="isLocked">false</b>
+        <CPartGuid xs.n="parentGuid" xs.ref="" />
+        <KeyformGridSource xs.n="keyformGridSource" xs.ref="" />
+        <KeyFormMorphTargetSet xs.n="keyformMorphTargetSet">
+          <carray_list xs.n="_morphTargets" count="0" />
+          <MorphTargetBlendWeightConstraintSet xs.n="blendWeightConstraintSet">
+            <carray_list xs.n="_constraints" count="0" />
+          </MorphTargetBlendWeightConstraintSet>
+        </KeyFormMorphTargetSet>
+        <carray_list xs.n="_extensions" count="0" />
+        <null xs.n="internalColor_direct_argb" />
+        <null xs.n="internalColor_indirect_argb" />
+      </ACParameterControllableSource>
+      <CDeformerGuid xs.n="guid" xs.ref="" />
+      <CDeformerId xs.n="id" idstr="" />
+      <CDeformerGuid xs.n="targetDeformerGuid" xs.ref="" />
+    </ACDeformerSource>
+    <i xs.n="col" />
+    <i xs.n="row" />
+    <b xs.n="isQuadTransform">true</b>
+    <carray_list xs.n="keyforms" count="1">
+      <CWarpDeformerForm>
+        <ACDeformerForm xs.n="super">
+          <ACForm xs.n="super">
+            <CFormGuid xs.n="guid" xs.ref="" />
+            <b xs.n="isAnimatedForm">false</b>
+            <b xs.n="isLocalAnimatedForm">false</b>
+            <CWarpDeformerSource xs.n="_source" xs.ref="" />
+            <null xs.n="name" />
+            <s xs.n="notes" />
+          </ACForm>
+          <f xs.n="opacity">1</f>
+          <CFloatColor xs.n="multiplyColor" red="1" green="1" blue="1" alpha="1.0" />
+          <CFloatColor xs.n="screenColor" red="0" green="0" blue="0" alpha="1.0" />
+          <CoordType xs.n="coordType" xs.ref="" />
+        </ACDeformerForm>
+        <float-array xs.n="positions" count="0" />
+      </CWarpDeformerForm>
+    </carray_list>
+  </CWarpDeformerSource>
+  <KeyformGridSource>
+    <array_list xs.n="keyformsOnGrid" count="1">
+      <KeyformOnGrid>
+        <KeyformGridAccessKey xs.n="accessKey">
+          <array_list xs.n="_keyOnParameterList" count="1">
+            <KeyOnParameter>
+              <KeyformBindingSource xs.n="binding" xs.ref="" />
+              <i xs.n="keyIndex">0</i>
+            </KeyOnParameter>
+          </array_list>
+        </KeyformGridAccessKey>
+        <CFormGuid xs.n="keyformGuid" xs.ref="" />
+      </KeyformOnGrid>
+    </array_list>
+    <array_list xs.n="keyformBindings" count="1">
+      <KeyformBindingSource xs.ref="" />
+    </array_list>
+  </KeyformGridSource>
+  <KeyformBindingSource>
+    <KeyformGridSource xs.n="_gridSource" xs.ref="" />
+    <CParameterGuid xs.n="parameterGuid" xs.ref="" />
+    <array_list xs.n="keys" count="3">
+      <f>-1</f>
+      <f>0</f>
+      <f>1</f>
+    </array_list>
+    <InterpolationType xs.n="interpolationType" v="LINEAR" />
+    <ExtendedInterpolationType xs.n="extendedInterpolationType" v="LINEAR" />
+    <i xs.n="insertPointCount">1</i>
+    <f xs.n="extendedInterpolationScale">1.0</f>
+    <s xs.n="description" />
+  </KeyformBindingSource>
+</templates>
