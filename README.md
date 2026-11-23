@@ -27,15 +27,16 @@
 
 ## 用一个原创纸吊饰试跑
 
+**[下载可直接在 Cubism 打开的练习工程](https://github.com/eastpeak001/live2d-character-workflow/releases/download/v1.0.0/paper-mobile-cubism-v1.0.0.zip)**。解压后打开 `Swing.can3` 播放和调整关键帧，打开 `Mobile.cmo3` 调整模型，或用图像编辑器打开 `Mobile.psd` 查看分层。下方命令从头生成同一个练习。
+
 安装 Python 3.10 或更高版本。进入技能文件夹后运行以下命令。练习会生成三层 PSD、两个独立的父子摆动参数和一段两秒循环。此练习素材也按 MIT 授权。
 
 ```sh
 python -m pip install -r requirements.txt
 python scripts/starter.py practice
-python scripts/bind_model.py practice/Neutral.cmo3 practice/rig.json practice/Mobile.cmo3 --psd practice/Mobile.psd
 ```
 
-在 Cubism 中打开 `practice/Mobile.cmo3`，可独立调整悬绳和坠饰。将模型放入动画场景，在模型轨道名称上单击右键，导入 `practice/Swing.motion3.json` 并将工程保存为 `Swing.can3`。真实角色从自己的分层 PSD 开始，在 Cubism 中保存中性模型，再替换本例的参数、支点和曲线。绘制与绑定方法见[角色制作与验收](skills/live2d-character-workflow/references/art-and-motion.md)。
+双击 `practice/Swing.can3`，在 Cubism 播放两秒的悬绳与坠饰循环，展开模型轨道就能移动关键帧。打开 `practice/Mobile.cmo3` 可以分别调整悬绳和坠饰的幅度。真实角色从自己的分层 PSD 开始，在 Cubism 中保存中性模型，再替换本例的参数、支点和曲线。[角色制作与验收](skills/live2d-character-workflow/references/art-and-motion.md)
 
 ## 可复用的环节
 
@@ -44,6 +45,7 @@ python scripts/bind_model.py practice/Neutral.cmo3 practice/rig.json practice/Mo
 | 将对齐好的透明图层、补画或蒙版合成分层 PSD | [layers_psd.py](skills/live2d-character-workflow/scripts/layers_psd.py) |
 | 为新导入的模型建立分层变形器、支点和独立参数 | [bind_model.py](skills/live2d-character-workflow/scripts/bind_model.py) |
 | 将按帧编写的动作曲线导入 Cubism 时间线 | [motion_keys.py](skills/live2d-character-workflow/scripts/motion_keys.py) |
+| 把动作配方写成可直接打开的原生动画工程 | [animate.py](skills/live2d-character-workflow/scripts/animate.py) |
 | 透明角色帧叠加背景、指定倍速并导出 MP4 | [compose.py](skills/live2d-character-workflow/scripts/compose.py) |
 
 遮挡补画、细部网格和动作质量需要制作人结合姿势判断。在官方 Cubism Editor 里可继续改模型参数、动作时间线和关键帧。

@@ -7,10 +7,9 @@
 ```sh
 python -m pip install -r requirements.txt
 python scripts/starter.py practice
-python scripts/bind_model.py practice/Neutral.cmo3 practice/rig.json practice/Mobile.cmo3 --psd practice/Mobile.psd
 ```
 
-新建一个练习目录。`Mobile.psd` 包含 Stand、Ribbon 和 Pendant 三个图层，`Neutral.cmo3` 是这张原创练习图的中性模型。打开 `Mobile.cmo3`，调节 “Swing at the hanger” 观察悬绳和吊坠共同摆动，再调 “Pendant follow-through” 观察吊坠相对悬绳转动。底座保持落在原位。`keys.json` 和 `Swing.motion3.json` 包含两条参数轨道。在 Cubism 创建动画场景并放入 `Mobile.cmo3`，设场景为 48 fps、时长两秒。右击模型轨道名称导入 `Swing.motion3.json`，另存为 `Swing.can3`。重新打开后可移动轨道关键帧。[放入模型](https://docs.live2d.com/en/cubism-editor-manual/loading-model-and-placement/) · [在动画中导入动作](https://docs.live2d.com/en/cubism-editor-manual/export-moc3-motion3-files/)
+生成的 `Mobile.psd` 包含 Stand、Ribbon 和 Pendant 三个图层。双击 `Swing.can3` 可在 Cubism 播放两秒循环并编辑关键帧。打开 `Mobile.cmo3`，调节 “Swing at the hanger” 观察悬绳和吊坠共同摆动，再调 “Pendant follow-through” 观察吊坠相对悬绳转动。底座保持落在原位。`keys.json` 是时间配方，`Swing.motion3.json` 可单独导入其他含有相同参数的场景。[放入模型](https://docs.live2d.com/en/cubism-editor-manual/loading-model-and-placement/) · [在动画中导入动作](https://docs.live2d.com/en/cubism-editor-manual/export-moc3-motion3-files/)
 
 ## 换成自己的画稿
 
@@ -18,7 +17,7 @@ python scripts/bind_model.py practice/Neutral.cmo3 practice/rig.json practice/Mo
 2. 运行 `python scripts/layers_psd.py layers.json Character.psd`，在 Cubism 打开 PSD，检查图层顺序与网格并保存为 `Neutral.cmo3`。需要清晰转折的部位可在 Cubism 调网格。中性工程为新导入、目标图层仍挂在根节点的模型。[官方 PSD 导入说明](https://docs.live2d.com/en/cubism-editor-manual/psd-import/)
 3. 在 `rig.json` 的 `controls` 数组中先写父变形器，再写子变形器。`id` 为独立的参数 ID，`name` 是面板名称，`layers` 写 Cubism 中的 ArtMesh ID。将同一图层分配给最内层控制器一次。参数有 −1、0、+1 三个关键形。
 4. 运行 `python scripts/bind_model.py Neutral.cmo3 rig.json Character.cmo3 --psd Character.psd`。使用新的输出名，拖动参数检查图层、支点和可见极限。对复杂五官、非线性衣褶或局部网格，在 Cubism 继续雕刻关键形。
-5. 在 `keys.json` 以原始帧率指定轨道，运行 `python scripts/motion_keys.py keys.json Action.motion3.json`。录入或导入关键帧后保存 `.can3`。移动工程时保持模型和动画的相对位置，在另一目录复开确认。
+5. 在 `keys.json` 以原始帧率指定轨道。将自己的模型放入新建的单场景动画并保存为 `Timeline.can3`，然后运行 `python scripts/animate.py Timeline.can3 Character.cmo3 keys.json Action.can3`。输入场景应只含这个模型，目标参数轨上应尚无关键帧。该脚本保留模型的画面布局，把曲线与控制点写入新的可编辑工程。也可运行 `python scripts/motion_keys.py keys.json Action.motion3.json`，在现有场景的模型轨道名称上单击右键，导入动作为独立操作。移动工程时保持模型和动画的相对位置，在另一目录复开确认。
 
 最小的图层清单如下。尺寸与坐标单位是源图像素。
 

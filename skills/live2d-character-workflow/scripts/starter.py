@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from shutil import copyfile
 from PIL import Image, ImageDraw
+from animate import animate
+from bind_model import ASSETS, bind
 from layers_psd import build
 from motion_keys import make
 
@@ -41,9 +43,10 @@ def create(folder):
     write("keys.json",curve)
     build(folder/"layers.json",folder/"Mobile.psd")
     write("Swing.motion3.json",make(curve))
-    copyfile(Path(__file__).resolve().parents[1] / "assets" / "starter-neutral.cmo3",
-             folder / "Neutral.cmo3")
-    print("Practice layers, Mobile.psd, Neutral.cmo3 and Swing.motion3.json are ready.")
+    copyfile(ASSETS / "starter-neutral.cmo3", folder / "Neutral.cmo3")
+    bind(folder / "Neutral.cmo3", controls, folder / "Mobile.cmo3", folder / "Mobile.psd")
+    animate(ASSETS / "starter-timeline.can3", folder / "Mobile.cmo3", curve, folder / "Swing.can3")
+    print("Open Mobile.cmo3 to pose the model or Swing.can3 to edit the two-second loop.")
 
 
 if __name__=="__main__":

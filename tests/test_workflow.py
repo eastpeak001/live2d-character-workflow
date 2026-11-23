@@ -26,7 +26,6 @@ class WorkflowTests(unittest.TestCase):
             neutral = folder/'Neutral.cmo3'
             specs = json.loads((folder/'rig.json').read_text())['controls']
             model_file = folder/'Mobile.cmo3'
-            bind(neutral, specs, model_file, folder/'Mobile.psd')
             xml = Archive(model_file.read_bytes()).xml()
             self.assertTrue(all(cls.encode() + b'?>' in xml for cls in WARP_CLASSES))
             scene = ET.fromstring(xml)
@@ -39,6 +38,19 @@ class WorkflowTests(unittest.TestCase):
                 poses = [field(form, 'positions').text for form in field(warp, 'keyforms')]
                 self.assertEqual(len(set(poses)), 3)
             motion = json.loads((folder/'Swing.motion3.json').read_text())
+            native = ET.fromstring(Archive((folder/'Swing.can3').read_bytes()).xml())
+            self.assertEqual(native.find(".//file[@xs.n='srcFile']").text, 'Mobile.cmo3')
+            movie = native.find('.//CMvMovieInfo')
+            self.assertEqual((field(movie,'fps').text, field(movie,'workspaceEnd').text), ('48','95'))
+            keys = json.loads((folder/'keys.json').read_text())['tracks']
+            native_curves = {}
+            for attr in native.findall('shared/CMvAttrF'):
+                target = attr.find('.//CParameterId')
+                if target is not None and target.get('idstr') in keys:
+                    native_curves[target.get('idstr')] = [
+                        [int(field(point, 'pos').text), float(field(point, 'doubleValue').text)]
+                        for point in attr.findall(".//CSeqPt[@xs.n='anchor']")]
+            self.assertEqual(native_curves, {name: track['keys'] for name, track in keys.items()})
             self.assertEqual([c['Id'] for c in motion['Curves']], ['ParamSwing', 'ParamTip'])
             self.assertEqual((motion['Meta']['Duration'], motion['Meta']['Fps']), (2.0, 48))
             for curve in motion['Curves']:
